@@ -28,5 +28,5 @@ for i = 1:length(sampledTime)
     end
 % MY IMPLEMENTATION END ---------------------------------------------------
 end
-% savedStates = sgolayfilt(savedStates',3,55)';
+savedStates = sgolayfilt(savedStates',4,55)';
 plotData(savedStates, sampledTime, sampledVicon, 1, datasetNum);
