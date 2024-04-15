@@ -62,8 +62,8 @@ function [covarEst,uEst] = pred_step(uPrev,covarPrev,angVel,acc,dt)
         f4 = nbg;
         f5 = nba; 
         Xt(:,i) = [x1 + (dt * f1); 
-            x2 + (dt * f2) - (G_inv * ng); 
-            x3 + (dt * f3) - (R * na); 
+            x2 + (dt * f2) - (dt * G_inv * ng); 
+            x3 + (dt * f3) - (dt * R * na); 
             x4 + (f4); ... x4 + (dt * f4); 
             x5 + (f5)]; ... x5 + (dt * f5)];
     end
