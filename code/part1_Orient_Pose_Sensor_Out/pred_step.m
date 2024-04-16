@@ -14,8 +14,8 @@ function [covarEst,uEst] = pred_step(uPrev,covarPrev,angVel,acc,dt)
     beta = 2;
     lambdaDash = (alpha^2) * (nDash + k) - nDash;
     uAugPrev = [uPrev; zeros(12,1)];
-    % Set Q as 0.01
-    Q = 0.01;
+    % Set Q as 0.02
+    Q = 0.02;
     % Calculate Qd
     Qd = dt*(eye(12) * Q);
     PAug = [covarPrev, zeros(15,12); zeros(12,15), Qd];
@@ -50,22 +50,22 @@ function [covarEst,uEst] = pred_step(uPrev,covarPrev,angVel,acc,dt)
 
         % Calculate inverse of Euler Rate Parameterisation (ZYX) for f(x,u,n)
         G_inv=[(czo*syo)/cyo,(syo*szo)/cyo,1;-szo,czo,0;czo/cyo,szo/cyo,0];
-
+        % G_inv = round(G_inv, 4);
         % Calculate Rotation matrix (ZYX) for f(x,u,n)
         R=[cyo*czo,czo*sxo*syo-cxo*szo,sxo*szo+cxo*czo*syo;
             cyo*szo,cxo*czo+sxo*syo*szo,cxo*syo*szo-czo*sxo;
             -syo,cyo*sxo,cxo*cyo];
-
+        % R = round(R, 4);
         f1 = x3;
         f2 = G_inv * (angVel - x4);
         f3 = [0;0;-9.8] + R *(acc - x5 - na); % 9.8 is only for Z axis
         f4 = nbg;
         f5 = nba; 
         Xt(:,i) = [x1 + (dt * f1); 
-            x2 + (dt * f2) - (dt * G_inv * ng); 
-            x3 + (dt * f3) - (dt * R * na); 
-            x4 + (f4); ... x4 + (dt * f4); 
-            x5 + (f5)]; ... x5 + (dt * f5)];
+            x2 + (dt * f2) - ng;
+            x3 + (dt * f3) - na;
+            x4 + (f4);
+            x5 + (f5)];
     end
     % disp("DEBUG POINT");
 
