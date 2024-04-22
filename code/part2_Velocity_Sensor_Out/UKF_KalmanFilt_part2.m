@@ -1,6 +1,6 @@
 clear; % Clear variables
 addpath('../data')
-datasetNum = 4; % CHANGE THIS VARIABLE TO CHANGE DATASET_NUM
+datasetNum = 1; % CHANGE THIS VARIABLE TO CHANGE DATASET_NUM
 [sampledData, sampledVicon, sampledTime, proj2Data] = init(datasetNum);
 % Set initial condition
 uPrev = vertcat(sampledVicon(1:9,1),zeros(6,1)); % Copy the Vicon Initial state
@@ -19,6 +19,7 @@ for i = 1:length(sampledTime)
         [covarEst,uEst] = pred_step(uPrev,covarPrev,sampledData(i).omg,sampledData(i).acc,dt);
         % Perform the update step
         [uCurr,covar_curr] = upd_step([vel(i,:), angVel2(i,:)]',covarEst,uEst);
+        % [uCurr,covar_curr] = upd_step_mod([vel(i,:), angVel2(i,:)]',covarEst,uEst);
         % Store updated state for plotting
         savedStates(:, i) = uCurr;
         % Update previous values

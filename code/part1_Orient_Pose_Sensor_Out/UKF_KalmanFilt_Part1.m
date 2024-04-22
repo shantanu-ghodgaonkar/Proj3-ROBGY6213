@@ -1,6 +1,6 @@
 clear; % Clear variables
 addpath('../data')
-datasetNum = 4; % CHANGE THIS VARIABLE TO CHANGE DATASET_NUM
+datasetNum = 1; % CHANGE THIS VARIABLE TO CHANGE DATASET_NUM
 [sampledData, sampledVicon, sampledTime,proj2Data] = init(datasetNum);
 
 Z = sampledVicon(1:6,:);
@@ -29,4 +29,3 @@ for i = 1:length(sampledTime)
 % MY IMPLEMENTATION END ---------------------------------------------------
 end
 plotData(savedStates, sampledTime, sampledVicon, 1, datasetNum);
-% plotData_mod(savedStates, sampledTime, sampledVicon, 1, datasetNum);
