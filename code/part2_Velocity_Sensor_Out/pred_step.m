@@ -18,7 +18,7 @@
     % Create the mean augmented matrix
     uAugPrev = [uPrev; zeros(12,1)];
     % Set Q as 0.02
-    Q = 0.02;
+    Q = 0.004;
     % Calculate Qd
     Qd = dt*(eye(12) * Q);
     % Create the covariance augmented matrix

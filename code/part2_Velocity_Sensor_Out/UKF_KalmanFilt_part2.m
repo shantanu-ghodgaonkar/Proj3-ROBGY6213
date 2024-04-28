@@ -19,7 +19,8 @@ for i = 1:length(sampledTime)
         [covarEst,uEst] = pred_step(uPrev,covarPrev,sampledData(i).omg,sampledData(i).acc,dt);
         % Perform the update step
         [uCurr,covar_curr] = upd_step([vel(i,:), angVel2(i,:)]',covarEst,uEst);
-        % [uCurr,covar_curr] = upd_step_mod([vel(i,:), angVel2(i,:)]',covarEst,uEst);
+        %[uCurr,covar_curr] = upd_step_mod([vel(i,:), angVel2(i,:)]',covarEst,uEst);
+        %[uCurr,covar_curr] = upd_step_mod2([vel(i,:), angVel2(i,:)]',covarEst,uEst);
         % Store updated state for plotting
         savedStates(:, i) = uCurr;
         % Update previous values
@@ -29,4 +30,4 @@ for i = 1:length(sampledTime)
 % MY IMPLEMENTATION END ---------------------------------------------------
 end
 
-plotData(savedStates, sampledTime, sampledVicon, 2, datasetNum);
+plotData_mod(savedStates, sampledTime, sampledVicon, 2, datasetNum);

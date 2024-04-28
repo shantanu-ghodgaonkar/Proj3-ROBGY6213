@@ -5,7 +5,7 @@ function [uCurr,covar_curr] = upd_step(z_t,covarEst,uEst)
     %covarEst - estimated covar of the  state
     %uEst - estimated mean of the state
     % R = Noise in System
-    R =  0.1 * eye(3);
+    R =  diag([0.002;0.02; 0.0009]);
     % vt =  Measurement Update Model noise
     vt = normrnd(0,(0.0005),[3,1]);
     % n = size of state vector
@@ -85,4 +85,3 @@ function [uCurr,covar_curr] = upd_step(z_t,covarEst,uEst)
     % Compute current covariance
     covar_curr = covarEst - (K * St * K');
 end
-
